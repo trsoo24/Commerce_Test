@@ -1,7 +1,7 @@
 package com.example.commerce;
 
 import com.example.commerce.entity.User;
-import com.example.commerce.entity.dao.SignUpDao;
+import com.example.commerce.entity.dao.UserDao;
 import com.example.commerce.entity.dto.SignUpDto;
 import com.example.commerce.repository.UserRepository;
 import com.example.commerce.service.CheckUserReference;
@@ -54,7 +54,7 @@ public class SignUpTests {
                 .build();
         //when
         when(userRepository.save(any(User.class))).thenReturn(user);
-        SignUpDao signUpDao = userService.signUp(signUpDto);
+        UserDao signUpDao = userService.signUp(signUpDto);
 
         //then
         assertNotNull(signUpDao);
