@@ -3,9 +3,12 @@ package com.example.commerce.entity;
 import com.example.commerce.entity.dto.SignUpDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Builder
 @NoArgsConstructor
@@ -25,6 +28,7 @@ public class User {
     private String phoneNumber;
     @Column(unique = true)
     private String email;
+    private LocalDateTime registeredAt;
 
     public User toUser(SignUpDto dto) {
         return User.builder()
@@ -34,6 +38,7 @@ public class User {
                 .name(dto.getName())
                 .phoneNumber(dto.getPhoneNumber())
                 .email(dto.getEmail())
+                .registeredAt(LocalDateTime.now())
                 .build();
     }
 }
