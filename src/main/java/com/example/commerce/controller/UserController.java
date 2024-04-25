@@ -1,6 +1,6 @@
 package com.example.commerce.controller;
 
-import com.example.commerce.entity.dao.SignUpDao;
+import com.example.commerce.entity.dao.UserDao;
 import com.example.commerce.entity.dto.SignUpDto;
 import com.example.commerce.service.UserService;
 import io.swagger.annotations.Api;
@@ -24,7 +24,7 @@ public class UserController {
 
     @PostMapping("/join")
     @ApiOperation(value = "회원가입 API", notes = "정상 동작시 응답 코드 201")
-    public ResponseEntity<SignUpDao> signup(@RequestBody @Valid SignUpDto signUpDto) {
+    public ResponseEntity<UserDao> signup(@RequestBody @Valid SignUpDto signUpDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.signUp(signUpDto));
     }
 }
