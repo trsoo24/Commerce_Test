@@ -4,6 +4,7 @@ import com.example.commerce.entity.dao.SignUpDao;
 import com.example.commerce.entity.dto.SignUpDto;
 import com.example.commerce.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,6 @@ public class UserController {
 
     @PostMapping("/join")
     public ResponseEntity<SignUpDao> signup(@RequestBody @Valid SignUpDto signUpDto) {
-        return ResponseEntity.ok(userService.signUp(signUpDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.signUp(signUpDto));
     }
 }
