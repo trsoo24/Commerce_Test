@@ -1,7 +1,6 @@
 package com.example.commerce.controller;
 
 import com.example.commerce.entity.dao.UserDao;
-import com.example.commerce.entity.dto.ModifyUserDto;
 import com.example.commerce.entity.dto.SignUpDto;
 import com.example.commerce.service.SearchService;
 import com.example.commerce.service.UserService;
@@ -11,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,13 +36,5 @@ public class UserController {
                                                      @RequestParam @Min(value = 1, message = "최소값은 0 입니다.") @Valid int pageSize,
                                                      @RequestParam @Min(value = 0, message = "가입일 순은 0 입니다.") @Max(value = 1, message = "이름 순은 1 입니다.") @Valid int sort) {
         return ResponseEntity.ok(searchService.findAllUser(page, pageSize, sort));
-    }
-
-    @PatchMapping("/{userId}")
-    @ApiOperation(value = "유저 정보 수정 API")
-    public ResponseEntity<UserDao> modifyUser(@PathVariable("userId") String userId,
-                                              @RequestBody @Valid ModifyUserDto modifyUserDto,
-                                              BindingResult result) {
-        return ResponseEntity.ok(userService.modifyUserData(userId, modifyUserDto));
     }
 }
