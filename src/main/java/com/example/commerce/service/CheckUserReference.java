@@ -1,5 +1,6 @@
 package com.example.commerce.service;
 
+import com.example.commerce.entity.User;
 import com.example.commerce.exception.CustomException;
 import com.example.commerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,10 @@ public class CheckUserReference {
         if (userRepository.existsByEmail(email)) {
             throw new CustomException(DUPLICATED_EMAIL);
         }
+    }
+
+    User findByUserId(String userId) {
+        return userRepository.findByUserId(userId)
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
     }
 }
