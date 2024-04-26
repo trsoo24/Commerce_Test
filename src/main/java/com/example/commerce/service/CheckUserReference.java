@@ -37,7 +37,7 @@ public class CheckUserReference {
         }
     }
 
-    User findByUserId(String userId) {
+    public User findByUserId(String userId) {
         return userRepository.findByUserId(userId)
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
     }
