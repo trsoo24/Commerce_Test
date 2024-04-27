@@ -2,6 +2,9 @@ package com.example.commerce.service;
 
 import com.example.commerce.entity.User;
 import com.example.commerce.entity.dao.UserDao;
+import com.example.commerce.entity.type.SortType;
+import com.example.commerce.exception.CustomCode;
+import com.example.commerce.exception.CustomException;
 import com.example.commerce.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.example.commerce.exception.CustomCode.*;
+
 @Service
 @RequiredArgsConstructor
 public class SearchService {
@@ -21,21 +26,26 @@ public class SearchService {
     /** 유저 전체 조회 API
      * @param page = 페이지 번호
      * @param pageSize = 한 페이지에 표시하는 최대 회원 수
-     * @param sort = { 0 = 가입일 순, 1 = 이름 순 }
+     * @param sortType = { 가입일 순, 이름 순 }
      */
-    public Page<UserDao> findAllUser(int page, int pageSize, int sort) {
+    public Page<UserDao> findAllUser(int page, int pageSize, SortType sortType) {
         List<User> userList = userRepository.findAll();
         List<UserDao> userDaoList = new ArrayList<>();
+
+        if (checkPageNegative(page)) throw new CustomException(NEGATIVE_PAGE_VALUE);
+        if (checkPageSizeNegative(pageSize)) throw new CustomException(NEGATIVE_PAGE_SIZE_VALUE);
 
         for (User user : userList) {
             UserDao userDao = new UserDao().toDao(user);
             userDaoList.add(userDao);
         }
 
-        if (sort == 0) { // 가입일 순
+        if (sortType.getSortType().equals("REGISTERED")) { // 가입일 순
             return sortByRegisteredAt(page, pageSize, userDaoList);
-        } else { // 이름 순
+        } else if (sortType.getSortType().equals("NAME")){ // 이름 순
             return sortByName(page, pageSize, userDaoList);
+        } else {
+            throw new CustomException(SORT_ERROR);
         }
     }
 
@@ -58,5 +68,13 @@ public class SearchService {
         int start = (int) pageRequest.getOffset();
         int end = Math.min((start + pageRequest.getPageSize()), userList.size());
         return new PageImpl<>(userList.subList(start, end), pageRequest, userList.size());
+    }
+
+    private boolean checkPageNegative(int page) {
+        return page < 0;
+    }
+
+    private boolean checkPageSizeNegative(int pageSize) {
+        return pageSize <= 0;
     }
 }

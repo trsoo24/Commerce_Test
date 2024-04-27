@@ -20,7 +20,10 @@ public enum CustomCode {
     NEED_MODIFY_EMAIL_FORM(HttpStatus.BAD_REQUEST, "올바르지 않은 이메일 양식입니다. user@email.com"),
 
     // 유저 조회 실패
-    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "찾을 수 없는 유저입니다.")
+    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "찾을 수 없는 유저입니다."),
+    NEGATIVE_PAGE_VALUE(HttpStatus.BAD_REQUEST, "요청하신 페이지가 음수 값입니다."),
+    NEGATIVE_PAGE_SIZE_VALUE(HttpStatus.BAD_REQUEST, "요청하신 전체 페이지가 음수 값입니다."),
+    SORT_ERROR(HttpStatus.BAD_REQUEST, "가입일 혹은 이름 순으로만 정렬 가능합니다.")
     ;
 
     private final HttpStatus status;
