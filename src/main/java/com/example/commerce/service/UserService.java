@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -26,6 +27,4 @@ public class UserService {
 
         return new UserDao().toDao(user);
     }
-
-
 }
