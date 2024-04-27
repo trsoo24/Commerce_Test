@@ -3,6 +3,7 @@ package com.example.commerce.controller;
 import com.example.commerce.entity.dao.UserDao;
 import com.example.commerce.entity.dto.ModifyUserDto;
 import com.example.commerce.entity.dto.SignUpDto;
+import com.example.commerce.entity.type.SortType;
 import com.example.commerce.service.SearchService;
 import com.example.commerce.service.UserService;
 import io.swagger.annotations.Api;
@@ -36,8 +37,8 @@ public class UserController {
     @ApiOperation(value = "유저 조회 API")
     public ResponseEntity<Page<UserDao>> findAllUser(@RequestParam @Min(value = 0, message = "최소값은 0 입니다.") @Valid int page,
                                                      @RequestParam @Min(value = 1, message = "최소값은 0 입니다.") @Valid int pageSize,
-                                                     @RequestParam @Min(value = 0, message = "가입일 순은 0 입니다.") @Max(value = 1, message = "이름 순은 1 입니다.") @Valid int sort) {
-        return ResponseEntity.ok(searchService.findAllUser(page, pageSize, sort));
+                                                     @RequestParam @Valid SortType sortType) {
+        return ResponseEntity.ok(searchService.findAllUser(page, pageSize, sortType));
     }
 
     @PatchMapping("/{userId}")
