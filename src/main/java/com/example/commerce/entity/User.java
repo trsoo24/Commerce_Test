@@ -41,4 +41,17 @@ public class User {
                 .registeredAt(LocalDateTime.now())
                 .build();
     }
+
+    public void modifyPassword(String password) {
+        this.password = password;
+    }
+    public void modifyNickname(String nickname) {
+        this.nickname = nickname;
+    }
+    public void modifyPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    public void modifyEmail(String email) {
+        this.email = email;
+    }
 }
