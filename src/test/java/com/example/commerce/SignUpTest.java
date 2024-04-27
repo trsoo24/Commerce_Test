@@ -1,6 +1,5 @@
 package com.example.commerce;
 
-import com.example.commerce.entity.User;
 import com.example.commerce.entity.dao.UserDao;
 import com.example.commerce.entity.dto.SignUpDto;
 import com.example.commerce.repository.UserRepository;
@@ -12,21 +11,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class SignUpTests {
+public class SignUpTest {
     @InjectMocks
     private UserService userService;
     @Mock
     private UserRepository userRepository;
     @Mock
     private CheckUserReference checkUserReference;
-
 
     @Test
     @DisplayName("회원가입 성공")
@@ -41,17 +35,7 @@ public class SignUpTests {
                 .email("test@naver.com")
                 .build();
 
-        User user = User.builder()
-                .id(1L)
-                .userId("testId")
-                .password("password")
-                .nickname("nickname")
-                .name("이름")
-                .phoneNumber("010-1111-1234")
-                .email("test@naver.com")
-                .build();
         //when
-        when(userRepository.save(any(User.class))).thenReturn(user);
         UserDao signUpDao = userService.signUp(signUpDto);
 
         //then

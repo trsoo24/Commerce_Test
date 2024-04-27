@@ -13,25 +13,25 @@ import static com.example.commerce.exception.CustomCode.*;
 public class CheckUserReference {
     private final UserRepository userRepository;
 
-    void existUserId(String userId) {
+    public void existUserId(String userId) {
         if (userRepository.existsByUserId(userId)) {
             throw new CustomException(DUPLICATED_USERID);
         }
     }
 
-    void existNickname(String nickName) {
+    public void existNickname(String nickName) {
         if (userRepository.existsByNickname(nickName)) {
             throw new CustomException(DUPLICATED_NICKNAME);
         }
     }
 
-    void existPhoneNumber(String phoneNumber) {
+    public void existPhoneNumber(String phoneNumber) {
         if (userRepository.existsByPhoneNumber(phoneNumber)) {
             throw new CustomException(DUPLICATED_PHONE_NUMBER);
         }
     }
 
-    void checkEmail(String email) {
+    public void existEmail(String email) {
         if (userRepository.existsByEmail(email)) {
             throw new CustomException(DUPLICATED_EMAIL);
         }

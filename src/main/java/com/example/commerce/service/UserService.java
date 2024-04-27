@@ -21,7 +21,7 @@ public class UserService {
         checkUserReference.existUserId(signUpDto.getUserId());
         checkUserReference.existNickname(signUpDto.getNickname());
         checkUserReference.existPhoneNumber(signUpDto.getPhoneNumber());
-        checkUserReference.checkEmail(signUpDto.getEmail());
+        checkUserReference.existEmail(signUpDto.getEmail());
 
         User user = new User().toUser(signUpDto);
         userRepository.save(user);
