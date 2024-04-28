@@ -36,12 +36,15 @@ public class UserService {
             user.modifyPassword(modifyUserDto.getPassword());
         }
         if (modifyUserDto.getNickname() != null) {
+            checkUserReference.existNickname(modifyUserDto.getNickname());
             user.modifyNickname(modifyUserDto.getNickname());
         }
         if (modifyUserDto.getEmail() != null) {
+            checkUserReference.existEmail(modifyUserDto.getEmail());
             user.modifyEmail(modifyUserDto.getEmail());
         }
         if (modifyUserDto.getPhoneNumber() != null) {
+            checkUserReference.existPhoneNumber(modifyUserDto.getPhoneNumber());
             user.modifyPhoneNumber(modifyUserDto.getPhoneNumber());
         }
         userRepository.save(user);
