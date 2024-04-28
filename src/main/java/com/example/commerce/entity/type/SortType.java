@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum SortType {
-    REGISTERED("REGISTERED"), NAME("name");
+    REGISTERED("REGISTERED"), NAME("NAME");
     private final String sortType;
 }

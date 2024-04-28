@@ -66,8 +66,7 @@ public class SearchService {
 
     private Page<UserDao> listToPage(List<UserDao> userList, PageRequest pageRequest) {
         int start = (int) pageRequest.getOffset();
-        int end = Math.min((start + pageRequest.getPageSize()), userList.size());
-        return new PageImpl<>(userList.subList(start, end), pageRequest, userList.size());
+        return new PageImpl<>(userList.subList(start, userList.size()), pageRequest, userList.size());
     }
 
     private boolean checkPageNegative(int page) {
